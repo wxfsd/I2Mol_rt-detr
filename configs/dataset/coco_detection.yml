@@ -1,0 +1,39 @@
+task: detection
+
+# num_classes: 23
+num_classes: 30
+remap_mscoco_category: False
+
+train_dataloader: 
+  type: DataLoader
+  dataset: 
+    type: CocoDetection
+    img_folder: /home/jovyan/volume/samba_share/from_docker/ocr_data/normal_/merged9/images/train
+    ann_file: /home/jovyan/volume/samba_share/from_docker/ocr_data/normal_/merged9/annotations/train.json
+    transforms:
+      type: Compose
+      ops: ~
+  shuffle: True
+  batch_size: 32
+  num_workers: 8
+  drop_last: True 
+
+
+val_dataloader:
+  type: DataLoader
+  dataset: 
+    type: CocoDetection
+    # img_folder: /home/jovyan/volume/samba_share/from_docker/ocr_data/normal_/merged9/images/val
+    # ann_file: /home/jovyan/volume/samba_share/from_docker/ocr_data/normal_/merged9/annotations/val.json
+    img_folder: /home/jovyan/rt-detr/data/real_processed/JPO_with_charge/images/test
+    ann_file: /home/jovyan/rt-detr/data/real_processed/JPO_with_charge/annotations/test.json
+    transforms:
+      type: Compose
+      ops: ~ 
+
+  shuffle: False
+  batch_size: 128
+  num_workers: 8
+  drop_last: False
+
+
